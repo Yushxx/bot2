@@ -36,7 +36,7 @@ ${sequenceTemplate}
 🚨 FONCTIONNE UNIQUEMENT SUR 1XBET ET LINEBET AVEC LE CODE PROMO Free221 ✅️ !
 
 [S'inscrire](https://bit.ly/3NJ4vy0)
-[Comment jouer](https://t.me/SOLKAH00/1102)
+[Comment jouer](https://t.me/c/1923341484/1102)
 `;
 
     // Options du clavier inline
@@ -44,7 +44,7 @@ ${sequenceTemplate}
         inline_keyboard: [
             [
                 { text: 'S\'inscrire', url: 'https://bit.ly/3NJ4vy0' },
-                { text: 'Comment jouer', url: 'https://t.me/SOLKAH00/1102' }
+                { text: 'Comment jouer', url: 'https://t.me/c/1923341484/1102' }
             ]
         ]
     };
