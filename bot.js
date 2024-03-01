@@ -13,3 +13,9 @@ bot.onText(/\/start/, (msg) => {
   };
   bot.sendMessage(chatId, welcomeMessage, {reply_markup: JSON.stringify(keyboard)});
 });
+
+// Code keep_alive pour éviter que le bot ne s'endorme
+http.createServer(function (req, res) {
+    res.write("I'm alive");
+    res.end();
+}).listen(8080);
