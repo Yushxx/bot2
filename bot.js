@@ -10,7 +10,7 @@ const gh = new GitHub({
     token: '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'
 });
 
-const repo = gh.getRepo('nom_utilisateur', 'nom_du_depot');
+const repo = gh.getRepo('yushxx', 'bot2');
 
 let users = [];
 
