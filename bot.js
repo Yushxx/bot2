@@ -7,7 +7,7 @@ const token = '6860603374:AAH4MxOE1cnstkJOj0HH4fWYacpGt5oAsuw';
 const bot = new TelegramBot(token, {polling: true});
 
 const gh = new GitHub({
-    token: 'VOTRE_TOKEN_GITHUB'
+    token: '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'
 });
 
 const repo = gh.getRepo('nom_utilisateur', 'nom_du_depot');
