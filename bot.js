@@ -62,6 +62,37 @@ bot.onText(/\/start/, (msg) => {
     };
     bot.sendMessage(chatId, welcomeMessage, {reply_markup: JSON.stringify(keyboard)});
 });
+// Fichier JSON pour stocker les IDs des utilisateurs
+const usersFile = 'users.json';
+
+// Charger les utilisateurs à partir du fichier JSON
+let users = [];
+if (fs.existsSync(usersFile)) {
+    users = JSON.parse(fs.readFileSync(usersFile));
+}
+
+// Enregistrer l'ID de l'utilisateur lorsqu'il démarre le bot
+bot.onText(/\/start/, (msg) => {
+    const chatId = msg.chat.id;
+    if (!users.includes(chatId)) {
+        users.push(chatId);
+        fs.writeFileSync(usersFile, JSON.stringify(users));
+    }
+});
+
+// Afficher le nombre d'utilisateurs lors de l'envoi de la commande /usercount
+bot.onText(/\/usercount/, (msg) => {
+    const chatId = msg.chat.id;
+    bot.sendMessage(chatId, `Nombre d'utilisateurs : ${users.length}`);
+});
+
+
+
+
+
+
+
+
 
 // Code keep_alive pour éviter que le bot ne s'endorme
 http.createServer(function (req, res) {
