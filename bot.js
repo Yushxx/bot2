@@ -5,7 +5,12 @@ const fs = require('fs');
 const token = '6776313554:AAGREb-M49a0IGY3HWwSNXtSyNWvQjjtkpo';
 const bot = new TelegramBot(token, {polling: true});
 
+const usersFile = 'users.json';
+
 let users = [];
+if (fs.existsSync(usersFile)) {
+    users = JSON.parse(fs.readFileSync(usersFile));
+}
 
 bot.on('message', (msg) => {
     const chatId = msg.chat.id;
@@ -13,7 +18,7 @@ bot.on('message', (msg) => {
         msg.new_chat_members.forEach(member => {
             if (!users.includes(member.id)) {
                 users.push(member.id);
-                fs.writeFileSync('users.json', JSON.stringify(users));
+                fs.writeFileSync(usersFile, JSON.stringify(users));
             }
         });
     }
@@ -62,39 +67,7 @@ bot.onText(/\/start/, (msg) => {
     };
     bot.sendMessage(chatId, welcomeMessage, {reply_markup: JSON.stringify(keyboard)});
 });
-// Fichier JSON pour stocker les IDs des utilisateurs
-const usersFile = 'users.json';
 
-// Charger les utilisateurs à partir du fichier JSON
-let users = [];
-if (fs.existsSync(usersFile)) {
-    users = JSON.parse(fs.readFileSync(usersFile));
-}
-
-// Enregistrer l'ID de l'utilisateur lorsqu'il démarre le bot
-bot.onText(/\/start/, (msg) => {
-    const chatId = msg.chat.id;
-    if (!users.includes(chatId)) {
-        users.push(chatId);
-        fs.writeFileSync(usersFile, JSON.stringify(users));
-    }
-});
-
-// Afficher le nombre d'utilisateurs lors de l'envoi de la commande /usercount
-bot.onText(/\/usercount/, (msg) => {
-    const chatId = msg.chat.id;
-    bot.sendMessage(chatId, `Nombre d'utilisateurs : ${users.length}`);
-});
-
-
-
-
-
-
-
-
-
-// Code keep_alive pour éviter que le bot ne s'endorme
 http.createServer(function (req, res) {
     res.write("I'm alive");
     res.end();
