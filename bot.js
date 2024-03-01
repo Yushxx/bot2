@@ -59,7 +59,7 @@ bot.onText(/\/usercount/, (msg) => {
 bot.onText(/\/start/, (msg) => {
     const chatId = msg.chat.id;
     const username = msg.from.username;
-    const welcomeMessage = `Salut ${username} ! Bienvenue dans le programme hack de solkah. Choisissez une option dans le menu en cliquant sur le bouton ci-dessous:`;
+    const welcomeMessage = `Salut ${username} ! Bienvenue dans le programme hack de solkah. Cliquez  sur le bouton ci-dessous pour nous rejoindre👇👇👇:`;
     const keyboard = {
         inline_keyboard: [
             [{ text: 'Rejoindre 💰🤑', url: 'https://t.me/+toA5QPKK5Nc4MTc0' }]
