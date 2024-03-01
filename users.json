@@ -1,0 +1,1 @@
+fs.writeFileSync('users.json', JSON.stringify(users));
