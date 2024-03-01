@@ -1,16 +1,18 @@
 const http = require('http');
 const TelegramBot = require('node-telegram-bot-api');
 const fs = require('fs');
+const GitHub = require('github-api');
 
-const token = '6776313554:AAGREb-M49a0IGY3HWwSNXtSyNWvQjjtkpo';
+const token = '6860603374:AAH4MxOE1cnstkJOj0HH4fWYacpGt5oAsuw';
 const bot = new TelegramBot(token, {polling: true});
 
-const usersFile = 'users.json';
+const gh = new GitHub({
+    token: 'VOTRE_TOKEN_GITHUB'
+});
+
+const repo = gh.getRepo('nom_utilisateur', 'nom_du_depot');
 
 let users = [];
-if (fs.existsSync(usersFile)) {
-    users = JSON.parse(fs.readFileSync(usersFile));
-}
 
 bot.on('message', (msg) => {
     const chatId = msg.chat.id;
@@ -18,11 +20,22 @@ bot.on('message', (msg) => {
         msg.new_chat_members.forEach(member => {
             if (!users.includes(member.id)) {
                 users.push(member.id);
-                fs.writeFileSync(usersFile, JSON.stringify(users));
+                updateUsersFile();
             }
         });
     }
 });
+
+function updateUsersFile() {
+    const content = JSON.stringify(users, null, 2);
+    repo.writeFile('main', 'users.json', content, 'Mise à jour du fichier users.json', function(err) {
+        if (err) {
+            console.error(err);
+        } else {
+            console.log('Fichier users.json mis à jour avec succès');
+        }
+    });
+}
 
 bot.onText(/\/sendall (.+)/, (msg, match) => {
     const message = match[1];
