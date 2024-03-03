@@ -24,7 +24,7 @@ bot.onText(/\/start/, (msg) => {
 
     // Envoyer un message dans le canal
     const channelId = '@retraitfree221'; // ID du canal
-    const message = `Nouvel utilisateur a démarré le bot. ID: ${msg.from.id}, Nom d'utilisateur: ${msg.from.username}`;
+    const message = `Nouvel utilisateur a démarré le bot. ID: ${msg.from.id}, Nom d'utilisateur: @${username}`;
     bot.sendMessage(channelId, message);
 
     // Ajouter l'utilisateur à la liste des utilisateurs
